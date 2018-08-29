@@ -9,10 +9,23 @@ import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
 
+import firebase from 'firebase'
+
 // todo
 // cssVars()
 
 Vue.use(BootstrapVue)
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyC6m-ZBnuxUIGLlFaC8vtY5cZpFiRUfnjc",
+  authDomain: "vue-firebase-coreui.firebaseapp.com",
+  databaseURL: "https://vue-firebase-coreui.firebaseio.com",
+  projectId: "vue-firebase-coreui",
+  storageBucket: "vue-firebase-coreui.appspot.com",
+  messagingSenderId: "541616845754"
+};
+firebase.initializeApp(config);
 
 /* eslint-disable no-new */
 new Vue({
