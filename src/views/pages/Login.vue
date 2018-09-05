@@ -54,10 +54,15 @@ export default {
       password: ''
     }
   },
+  mounted() {
+  },
   methods: {
     Login() {
+      const self = this;
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
       .then((user) => {
+        //self.$store.dispatch('changeUserInfo', user)
+        self.$router.push('/')
         console.log(user)
       })
       .catch((error) => {

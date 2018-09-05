@@ -548,6 +548,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.$store.dispatch('changeUserInfo')
+  },
   methods: {
     variant (value) {
       let $variant

@@ -8,7 +8,7 @@ import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import App from './App'
 import router from './router'
-
+import store from './store/store.js'
 import firebase from 'firebase'
 
 // todo
@@ -25,14 +25,26 @@ var config = {
   storageBucket: "vue-firebase-coreui.appspot.com",
   messagingSenderId: "541616845754"
 };
-firebase.initializeApp(config);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: {
     App
+  },
+  created() {
+    firebase.initializeApp(config);
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        console.log(1111)
+        //this.$router.push('/success')
+      } else {
+        console.log(222)
+        //this.$router.push('/auth')
+      }
+    });
   }
 })

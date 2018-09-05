@@ -90,6 +90,8 @@ export default {
       nav: nav.items
     }
   },
+  mounted() {
+  },
   computed: {
     name () {
       return this.$route.name
