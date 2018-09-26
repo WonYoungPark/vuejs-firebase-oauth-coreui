@@ -1,6 +1,7 @@
 <template>
   <AppHeaderDropdown right no-caret>
     <template slot="header">
+      {{ loginedUser }}
       <img
         src="img/avatars/6.jpg"
         class="img-avatar"
@@ -50,6 +51,11 @@ export default {
   },
   data: () => {
     return { itemsCount: 42 }
+  },
+  computed: {
+    loginedUser() {
+      return this.$store.state.userInfo;
+    }
   },
   methods: {
     Logout() {

@@ -6,7 +6,7 @@
           <b-card-group>
             <b-card no-body class="p-4">
               <b-card-body>
-                <b-form>
+                <b-form @keyup.enter="onSignin()">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <b-input-group class="mb-3">
@@ -19,7 +19,7 @@
                   </b-input-group>
                   <b-row>
                     <b-col cols="6">
-                      <b-button @click="Login()" variant="primary" class="px-4">Login</b-button>
+                      <b-button @click="onSignin()" variant="primary" class="px-4">Login</b-button>
                     </b-col>
                     <b-col cols="6" class="text-right">
                       <b-button variant="link" class="px-0">Forgot password?</b-button>
@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 export default {
   name: 'Login',
   data() {
@@ -54,20 +53,21 @@ export default {
       password: ''
     }
   },
-  mounted() {
+  computed: {
+    user () {
+      return this.$store.getters.user
+    }
+  },
+  watch: {
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/')
+      }
+    }
   },
   methods: {
-    Login() {
-      const self = this;
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      .then((user) => {
-        //self.$store.dispatch('changeUserInfo', user)
-        self.$router.push('/')
-        console.log(user)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    onSignin () {
+      this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
     }
   }
 }
